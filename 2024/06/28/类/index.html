@@ -1,0 +1,979 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/bicon.png">
+  <link rel="icon" href="/img/bicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wangdada">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="要点速记 类方法可以不用实例直接调用 类属性只能用类修改，而不能用实例的对象修改 类属性一旦修改，所有该类实例化出的对象该属性都会被修改  🎉 你好！我是 Mr. Ranedeer 🦌，你可以称呼我为 Ranedeer 老师。我会用中文帮助你学习，并且确保我们一起学习的过程既有趣又有效！ 以下是你的学习配置：  深度：高中 学习风格：主动 沟通风格：苏格拉底式 语气风格：鼓励 推理框架：因果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python类">
+<meta property="og:url" content="https://www.doit.cloudns.be/2024/06/28/%E7%B1%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="要点速记 类方法可以不用实例直接调用 类属性只能用类修改，而不能用实例的对象修改 类属性一旦修改，所有该类实例化出的对象该属性都会被修改  🎉 你好！我是 Mr. Ranedeer 🦌，你可以称呼我为 Ranedeer 老师。我会用中文帮助你学习，并且确保我们一起学习的过程既有趣又有效！ 以下是你的学习配置：  深度：高中 学习风格：主动 沟通风格：苏格拉底式 语气风格：鼓励 推理框架：因果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-27T16:28:13.000Z">
+<meta property="article:modified_time" content="2024-06-28T15:34:03.428Z">
+<meta property="article:author" content="Wangdada">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>python类 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/-/css/latex.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.doit.cloudns.be","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>留痕</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="python类"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-28 00:28" pubdate>
+          2024年6月28日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">python类</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年6月28日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="要点速记"><a href="#要点速记" class="headerlink" title="要点速记"></a>要点速记</h2><ul>
+<li>类方法可以不用实例直接调用</li>
+<li>类属性只能用类修改，而不能用实例的对象修改</li>
+<li>类属性一旦修改，所有该类实例化出的对象该属性都会被修改</li>
+</ul>
+<p>🎉 你好！我是 Mr. Ranedeer 🦌，你可以称呼我为 Ranedeer 老师。我会用中文帮助你学习，并且确保我们一起学习的过程既有趣又有效！</p>
+<p>以下是你的学习配置：</p>
+<ul>
+<li>深度：高中</li>
+<li>学习风格：主动</li>
+<li>沟通风格：苏格拉底式</li>
+<li>语气风格：鼓励</li>
+<li>推理框架：因果</li>
+<li>表情符号：启用</li>
+<li>语言：中文</li>
+</ul>
+<p>你可以随时调整这些配置来更好地适应你的学习需求。如果你需要更改配置，请访问这个链接： <a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-0XxT0SGIS-mr-ranedeer-config-wizard">配置向导</a> .</p>
+<p>接下来你想学习什么呢？你可以使用以下命令：</p>
+<ul>
+<li>&#x2F;plan：制定学习计划</li>
+<li>&#x2F;start：开始一节课</li>
+<li>&#x2F;continue：继续学习</li>
+<li>&#x2F;example：查看配置示例</li>
+</ul>
+<p>请告诉我你想要做什么，我们一起开始吧！ 🎓✨ </p>
+<p>You: </p>
+<ul>
+<li>&#x2F;plan 学习 python 类的用法，深度为专家级</li>
+</ul>
+<p>ChatGPT: </p>
+<hr>
+<h1 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h1><h3 id="0-1-Python-基础"><a href="#0-1-Python-基础" class="headerlink" title="0.1 Python 基础"></a>0.1 Python 基础</h3><ul>
+<li>Python 语法基础：变量、数据类型、运算符、条件语句、循环、函数等。</li>
+<li>Python 模块和包：如何导入和使用标准库模块以及第三方包。</li>
+</ul>
+<h3 id="0-2-面向对象编程概念"><a href="#0-2-面向对象编程概念" class="headerlink" title="0.2 面向对象编程概念"></a>0.2 面向对象编程概念</h3><ul>
+<li>面向对象编程（OOP）的基本概念：类、对象、继承、多态、封装。</li>
+<li>OOP 的优势和应用场景。</li>
+</ul>
+<h3 id="0-3-Python-类和对象基础"><a href="#0-3-Python-类和对象基础" class="headerlink" title="0.3 Python 类和对象基础"></a>0.3 Python 类和对象基础</h3><ul>
+<li>类的定义和对象的创建。</li>
+<li>类属性和方法。</li>
+<li>实例属性和方法。 </li>
+<li><code>__init__</code> 方法。</li>
+</ul>
+<h3 id="0-4-类的继承"><a href="#0-4-类的继承" class="headerlink" title="0.4 类的继承"></a>0.4 类的继承</h3><ul>
+<li>单继承和多继承。 </li>
+<li><code>super()</code> 函数的使用。</li>
+<li>方法重载和重写。</li>
+</ul>
+<h3 id="0-5-类的高级特性"><a href="#0-5-类的高级特性" class="headerlink" title="0.5 类的高级特性"></a>0.5 类的高级特性</h3><ul>
+<li>类属性和类方法 (<code>@classmethod</code>)。 </li>
+<li>静态方法 (<code>@staticmethod</code>)。 </li>
+<li>魔术方法（<code>__str__</code>, <code>__repr__</code>, <code>__eq__</code> 等）。</li>
+</ul>
+<h1 id="Main-Curriculum"><a href="#Main-Curriculum" class="headerlink" title="Main Curriculum"></a>Main Curriculum</h1><h3 id="1-1-Python-类的深入理解"><a href="#1-1-Python-类的深入理解" class="headerlink" title="1.1 Python 类的深入理解"></a>1.1 Python 类的深入理解</h3><ul>
+<li>类和对象的内部工作机制。</li>
+<li>元类（Metaclass）的概念及其应用。</li>
+</ul>
+<h3 id="1-2-属性和方法的高级用法"><a href="#1-2-属性和方法的高级用法" class="headerlink" title="1.2 属性和方法的高级用法"></a>1.2 属性和方法的高级用法</h3><ul>
+<li>使用 <code>property</code> 装饰器定义属性。</li>
+<li>描述符（Descriptor）的使用和实现。</li>
+<li>动态属性的创建和管理。</li>
+</ul>
+<h3 id="1-3-继承与组合的高级应用"><a href="#1-3-继承与组合的高级应用" class="headerlink" title="1.3 继承与组合的高级应用"></a>1.3 继承与组合的高级应用</h3><ul>
+<li>继承的深层次理解和应用场景。</li>
+<li>组合（Composition）与聚合（Aggregation）的区别和使用场景。</li>
+<li>MRO（方法解析顺序）的详细解释。</li>
+</ul>
+<h3 id="1-4-抽象基类（ABC）"><a href="#1-4-抽象基类（ABC）" class="headerlink" title="1.4 抽象基类（ABC）"></a>1.4 抽象基类（ABC）</h3><ul>
+<li><code>abc</code> 模块和抽象基类的定义。</li>
+<li>抽象方法和抽象属性的实现。</li>
+</ul>
+<h3 id="1-5-面向对象设计模式"><a href="#1-5-面向对象设计模式" class="headerlink" title="1.5 面向对象设计模式"></a>1.5 面向对象设计模式</h3><ul>
+<li>常用的设计模式（如单例模式、工厂模式、观察者模式等）在 Python 中的实现。</li>
+<li>使用设计模式优化代码结构和提升代码可维护性。</li>
+</ul>
+<h3 id="1-6-元编程"><a href="#1-6-元编程" class="headerlink" title="1.6 元编程"></a>1.6 元编程</h3><ul>
+<li>使用 <code>type()</code> 动态创建类。</li>
+<li>类装饰器和函数装饰器的实现。 </li>
+<li>使用 <code>__new__</code> 和 <code>__init__</code> 方法自定义对象创建过程。</li>
+</ul>
+<h3 id="1-7-反射与动态导入"><a href="#1-7-反射与动态导入" class="headerlink" title="1.7 反射与动态导入"></a>1.7 反射与动态导入</h3><ul>
+<li>反射（Reflection）的概念和应用。 </li>
+<li>使用 <code>getattr</code>、<code>setattr</code>、<code>hasattr</code> 和 <code>delattr</code> 进行动态属性操作。</li>
+<li>动态导入模块和类。</li>
+</ul>
+<h3 id="1-8-性能优化"><a href="#1-8-性能优化" class="headerlink" title="1.8 性能优化"></a>1.8 性能优化</h3><ul>
+<li>类和对象的性能问题及优化技巧。</li>
+<li>内存管理和垃圾回收机制。 </li>
+<li>使用 <code>slots</code> 优化内存使用。</li>
+</ul>
+<h3 id="1-9-实战项目"><a href="#1-9-实战项目" class="headerlink" title="1.9 实战项目"></a>1.9 实战项目</h3><ul>
+<li>创建一个综合运用上述知识的项目。</li>
+<li>代码审查和优化。</li>
+</ul>
+<h3 id="1-10-总结与评估"><a href="#1-10-总结与评估" class="headerlink" title="1.10 总结与评估"></a>1.10 总结与评估</h3><ul>
+<li>复习所学内容。</li>
+<li>通过小测验和项目评估学习效果。—</li>
+</ul>
+<p>请说 <strong>“&#x2F;start”</strong>  开始学习计划。</p>
+<p>You: </p>
+<ul>
+<li>&#x2F;start</li>
+</ul>
+<p>ChatGPT: </p>
+<hr>
+<p><strong>主题</strong> : Python 类的深入理解—</p>
+<h2 id="主课"><a href="#主课" class="headerlink" title="主课"></a>主课</h2><h3 id="1-1-Python-类的深入理解-1"><a href="#1-1-Python-类的深入理解-1" class="headerlink" title="1.1 Python 类的深入理解"></a>1.1 Python 类的深入理解</h3><h4 id="1-1-1-类和对象的内部工作机制"><a href="#1-1-1-类和对象的内部工作机制" class="headerlink" title="1.1.1 类和对象的内部工作机制"></a>1.1.1 类和对象的内部工作机制</h4><p>在 Python 中，一切皆对象。类是创建对象的蓝图，而对象是类的实例。理解类和对象的内部工作机制是掌握面向对象编程的基础。 </p>
+<ul>
+<li><strong>类的定义</strong> ：类是通过 <code>class</code> 关键字定义的。类可以包含属性（变量）和方法（函数）。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>:<br>    class_attribute = <span class="hljs-string">&quot;I am a class attribute&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, value</span>):<br>        <span class="hljs-variable language_">self</span>.instance_attribute = value<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">instance_method</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Instance method called, instance attribute: <span class="hljs-subst">&#123;self.instance_attribute&#125;</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li><strong>对象的创建</strong> ：对象是类的实例，通过调用类的构造方法（通常是 <code>__init__</code> 方法）来创建。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">my_object = MyClass(<span class="hljs-string">&quot;I am an instance attribute&quot;</span>)<br><span class="hljs-built_in">print</span>(my_object.class_attribute)  <span class="hljs-comment"># 输出: I am a class attribute</span><br><span class="hljs-built_in">print</span>(my_object.instance_method())  <span class="hljs-comment"># 输出: Instance method called, instance attribute: I am an instance attribute</span><br></code></pre></td></tr></table></figure>
+
+
+<h4 id="1-1-2-元类（Metaclass）的概念及其应用"><a href="#1-1-2-元类（Metaclass）的概念及其应用" class="headerlink" title="1.1.2 元类（Metaclass）的概念及其应用"></a>1.1.2 元类（Metaclass）的概念及其应用</h4><p>元类是创建类的类。默认情况下，Python 中的所有类都是由 <code>type</code> 元类创建的。元类可以控制类的创建和行为，是一种高级特性。 </p>
+<ul>
+<li><strong>自定义元类</strong> ：可以通过继承 <code>type</code> 来创建自定义元类，并通过 <code>__new__</code> 和 <code>__init__</code> 方法来修改类的创建过程。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Creating class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().__new__(cls, name, bases, dct)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>(metaclass=MyMeta):<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># 输出: Creating class MyClass</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>元类在框架开发中非常有用，因为它们可以在类创建时自动添加或修改属性和方法。—</p>
+<h3 id="互动时间"><a href="#互动时间" class="headerlink" title="互动时间"></a>互动时间</h3><p>你对类和对象的工作机制以及元类的概念有任何问题吗？或者你想尝试一个小练习来巩固这些概念？🦌</p>
+<p>You: </p>
+<ul>
+<li>class_attribute 和 def <strong>init</strong>(self, value):<br>  中的 self.instance_attribute &#x3D; value 有什么区别</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>好的，让我们仔细看看 <code>class_attribute</code> 和 <code>self.instance_attribute</code> 的区别。🦌</li>
+</ul>
+<h3 id="类属性和实例属性的区别"><a href="#类属性和实例属性的区别" class="headerlink" title="类属性和实例属性的区别"></a>类属性和实例属性的区别</h3><h4 id="1-类属性-Class-Attribute"><a href="#1-类属性-Class-Attribute" class="headerlink" title="1. 类属性 (Class Attribute)"></a>1. 类属性 (Class Attribute)</h4><ul>
+<li><strong>定义</strong> ：类属性是直接在类体内定义的属性，它属于类本身，而不是某个特定的对象。 </li>
+<li><strong>作用范围</strong> ：类属性在所有该类的实例中是共享的。也就是说，所有实例共享同一个类属性。 </li>
+<li><strong>访问方式</strong> ：可以通过类名或实例来访问类属性。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>:<br>    class_attribute = <span class="hljs-string">&quot;I am a class attribute&quot;</span><br><br><span class="hljs-comment"># 通过类名访问类属性</span><br><span class="hljs-built_in">print</span>(MyClass.class_attribute)  <span class="hljs-comment"># 输出: I am a class attribute</span><br><br><span class="hljs-comment"># 创建实例并通过实例访问类属性</span><br>instance1 = MyClass()<br><span class="hljs-built_in">print</span>(instance1.class_attribute)  <span class="hljs-comment"># 输出: I am a class attribute</span><br><br><span class="hljs-comment"># 修改类属性</span><br>MyClass.class_attribute = <span class="hljs-string">&quot;New value&quot;</span><br><span class="hljs-built_in">print</span>(MyClass.class_attribute)  <span class="hljs-comment"># 输出: New value</span><br><span class="hljs-built_in">print</span>(instance1.class_attribute)  <span class="hljs-comment"># 输出: New value</span><br></code></pre></td></tr></table></figure>
+
+
+<h4 id="2-实例属性-Instance-Attribute"><a href="#2-实例属性-Instance-Attribute" class="headerlink" title="2. 实例属性 (Instance Attribute)"></a>2. 实例属性 (Instance Attribute)</h4><ul>
+<li><strong>定义</strong> ：实例属性是在类的构造方法（通常是 <code>__init__</code> 方法）中使用 <code>self</code> 关键字定义的属性。它属于类的每个具体实例。 </li>
+<li><strong>作用范围</strong> ：实例属性只在创建它们的那个对象中存在，每个实例都有自己独立的实例属性。 </li>
+<li><strong>访问方式</strong> ：只能通过实例来访问实例属性。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, value</span>):<br>        <span class="hljs-variable language_">self</span>.instance_attribute = value<br><br><span class="hljs-comment"># 创建实例并通过实例访问实例属性</span><br>instance1 = MyClass(<span class="hljs-string">&quot;Instance 1 value&quot;</span>)<br>instance2 = MyClass(<span class="hljs-string">&quot;Instance 2 value&quot;</span>)<br><br><span class="hljs-built_in">print</span>(instance1.instance_attribute)  <span class="hljs-comment"># 输出: Instance 1 value</span><br><span class="hljs-built_in">print</span>(instance2.instance_attribute)  <span class="hljs-comment"># 输出: Instance 2 value</span><br><br><span class="hljs-comment"># 修改实例属性</span><br>instance1.instance_attribute = <span class="hljs-string">&quot;New value for instance 1&quot;</span><br><span class="hljs-built_in">print</span>(instance1.instance_attribute)  <span class="hljs-comment"># 输出: New value for instance 1</span><br><span class="hljs-built_in">print</span>(instance2.instance_attribute)  <span class="hljs-comment"># 输出: Instance 2 value</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><strong>类属性</strong> ：共享给所有实例，属于类本身。 </li>
+<li><strong>实例属性</strong> ：每个实例独有，属于具体的实例。</li>
+</ul>
+<p>希望这个解释能帮助你理解类属性和实例属性的区别。如果你有更多问题，或者想要进一步练习，请告诉我！🦌</p>
+<p>You: </p>
+<ul>
+<li>好的，接下来详细讲解自定义元类</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>好的，接下来我们详细讲解一下自定义元类。元类是一个相对高级的概念，但理解它们可以让你更好地掌控 Python 类的创建和行为。</li>
+</ul>
+<h3 id="什么是元类-Metaclass-？"><a href="#什么是元类-Metaclass-？" class="headerlink" title="什么是元类 (Metaclass)？"></a>什么是元类 (Metaclass)？</h3><p>元类是创建类的类。换句话说，元类可以控制类的创建、修改类的属性和方法等。默认情况下，Python 中所有的类都是由 <code>type</code> 元类创建的。</p>
+<h3 id="自定义元类"><a href="#自定义元类" class="headerlink" title="自定义元类"></a>自定义元类</h3><p>你可以通过继承 <code>type</code> 类来创建自定义元类，并重写 <code>__new__</code> 和 <code>__init__</code> 方法来修改类的创建过程。</p>
+<h4 id="new-方法"><a href="#new-方法" class="headerlink" title="__new__ 方法"></a><code>__new__</code> 方法</h4><p><code>__new__</code> 方法是在类创建之前调用的。它用于创建并返回一个新的类对象。</p>
+<h4 id="init-方法"><a href="#init-方法" class="headerlink" title="__init__ 方法"></a><code>__init__</code> 方法</h4><p><code>__init__</code> 方法是在类创建之后调用的。它用于初始化类对象。</p>
+<h3 id="自定义元类的实现"><a href="#自定义元类的实现" class="headerlink" title="自定义元类的实现"></a>自定义元类的实现</h3><p>以下是一个简单的自定义元类的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义自定义元类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Creating class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        <span class="hljs-comment"># 在这里可以添加或修改类的属性和方法</span><br>        dct[<span class="hljs-string">&#x27;added_attribute&#x27;</span>] = <span class="hljs-string">&#x27;This is an added attribute&#x27;</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().__new__(cls, name, bases, dct)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Initializing class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        <span class="hljs-built_in">super</span>().__init__(name, bases, dct)<br><br><span class="hljs-comment"># 使用自定义元类创建类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>(metaclass=MyMeta):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.instance_attribute = <span class="hljs-string">&#x27;Instance attribute&#x27;</span><br><br><span class="hljs-comment"># 实例化类</span><br>instance = MyClass()<br><span class="hljs-built_in">print</span>(instance.added_attribute)  <span class="hljs-comment"># 输出: This is an added attribute</span><br><span class="hljs-built_in">print</span>(instance.instance_attribute)  <span class="hljs-comment"># 输出: Instance attribute</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><ol>
+<li><strong>MyMeta</strong> ：</li>
+</ol>
+<ul>
+<li>继承自 <code>type</code>。 </li>
+<li>重写 <code>__new__</code> 方法，添加了 <code>added_attribute</code> 属性。 </li>
+<li>重写 <code>__init__</code> 方法，用于初始化类对象。</li>
+</ul>
+<ol start="2">
+<li><strong>MyClass</strong> ：</li>
+</ol>
+<ul>
+<li><code>MyClass</code> 的元类被设置为 <code>MyMeta</code>，因此在创建 <code>MyClass</code> 时，会调用 <code>MyMeta</code> 的 <code>__new__</code> 和 <code>__init__</code> 方法。</li>
+</ul>
+<ol start="3">
+<li><strong>MyClass</strong> ：</li>
+</ol>
+<ul>
+<li>创建 <code>MyClass</code> 的实例 <code>instance</code>。 </li>
+<li><code>instance</code> 具有 <code>added_attribute</code>（由元类添加）和 <code>instance_attribute</code>（由实例初始化）。</li>
+</ul>
+<h3 id="元类的应用场景"><a href="#元类的应用场景" class="headerlink" title="元类的应用场景"></a>元类的应用场景</h3><p>元类在以下场景中特别有用： </p>
+<ol>
+<li><strong>自动注册类</strong> ：在框架开发中，自动注册类到某个注册表。 </li>
+<li><strong>单例模式</strong> ：控制类的实例化过程，确保某个类只有一个实例。 </li>
+<li><strong>自动添加属性和方法</strong> ：在类创建时，自动添加或修改属性和方法。 </li>
+<li><strong>数据验证</strong> ：在类创建时，自动进行数据验证或处理。</li>
+</ol>
+<h3 id="实战示例：单例模式"><a href="#实战示例：单例模式" class="headerlink" title="实战示例：单例模式"></a>实战示例：单例模式</h3><p>使用元类实现单例模式，确保一个类只有一个实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SingletonMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    _instances = &#123;&#125;<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">cls, *args, **kwargs</span>):<br>        <span class="hljs-keyword">if</span> cls <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> cls._instances:<br>            cls._instances[cls] = <span class="hljs-built_in">super</span>().__call__(*args, **kwargs)<br>        <span class="hljs-keyword">return</span> cls._instances[cls]<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SingletonClass</span>(metaclass=SingletonMeta):<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># 测试单例模式</span><br>instance1 = SingletonClass()<br>instance2 = SingletonClass()<br><br><span class="hljs-built_in">print</span>(instance1 <span class="hljs-keyword">is</span> instance2)  <span class="hljs-comment"># 输出: True</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在这个示例中，<code>SingletonMeta</code> 元类通过重写 <code>__call__</code> 方法来控制类的实例化过程，确保 <code>SingletonClass</code> 只有一个实例。</p>
+<p>希望这个详细讲解能帮助你理解和应用自定义元类。如果你有任何问题或需要进一步的解释，请告诉我！🦌</p>
+<p>You: </p>
+<ul>
+<li>进一步解释</li>
+</ul>
+<p>ChatGPT: </p>
+<ul>
+<li>好的，我们来进一步深入解释自定义元类的概念和其应用。</li>
+</ul>
+<h3 id="元类的基本概念"><a href="#元类的基本概念" class="headerlink" title="元类的基本概念"></a>元类的基本概念</h3><p>在 Python 中，所有的类都是通过一个叫做“元类”的东西创建的。默认的元类是 <code>type</code>。当你定义一个类时，Python 使用 <code>type</code> 创建这个类的对象。元类允许你干预类的创建过程。</p>
+<h3 id="type-的使用"><a href="#type-的使用" class="headerlink" title="type 的使用"></a><code>type</code> 的使用</h3><p>让我们首先看看如何使用 <code>type</code> 来动态创建类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用 type 动态创建一个类</span><br>MyClass = <span class="hljs-built_in">type</span>(<span class="hljs-string">&#x27;MyClass&#x27;</span>, (<span class="hljs-built_in">object</span>,), &#123;<span class="hljs-string">&#x27;class_attribute&#x27;</span>: <span class="hljs-string">&#x27;I am a class attribute&#x27;</span>&#125;)<br><br><span class="hljs-comment"># 实例化 MyClass</span><br>instance = MyClass()<br><span class="hljs-built_in">print</span>(instance.class_attribute)  <span class="hljs-comment"># 输出: I am a class attribute</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>这里我们使用 <code>type</code> 创建了一个名为 <code>MyClass</code> 的类，它继承自 <code>object</code>，并且有一个类属性 <code>class_attribute</code>。</p>
+<h3 id="自定义元类-1"><a href="#自定义元类-1" class="headerlink" title="自定义元类"></a>自定义元类</h3><p>你可以通过继承 <code>type</code> 来创建自定义元类，重写 <code>__new__</code> 和 <code>__init__</code> 方法以控制类的创建和初始化过程。</p>
+<h4 id="1-new-方法"><a href="#1-new-方法" class="headerlink" title="1. __new__ 方法"></a>1. <code>__new__</code> 方法</h4><p><code>__new__</code> 方法在类创建之前被调用，用于创建类的实例。它接受以下参数： </p>
+<ul>
+<li><code>cls</code>：当前准备创建的类。 </li>
+<li><code>name</code>：类名。 </li>
+<li><code>bases</code>：类的基类（父类）的元组。 </li>
+<li><code>dct</code>：类的属性和方法字典。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Creating class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        <span class="hljs-comment"># 在这里可以添加或修改类的属性和方法</span><br>        dct[<span class="hljs-string">&#x27;added_attribute&#x27;</span>] = <span class="hljs-string">&#x27;This is an added attribute&#x27;</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().__new__(cls, name, bases, dct)<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="2-init-方法"><a href="#2-init-方法" class="headerlink" title="2. __init__ 方法"></a>2. <code>__init__</code> 方法</h4><p><code>__init__</code> 方法在类创建之后被调用，用于初始化类对象。它接受以下参数： </p>
+<ul>
+<li><code>cls</code>：当前准备创建的类。 </li>
+<li><code>name</code>：类名。 </li>
+<li><code>bases</code>：类的基类（父类）的元组。 </li>
+<li><code>dct</code>：类的属性和方法字典。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Initializing class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        <span class="hljs-built_in">super</span>().__init__(name, bases, dct)<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="应用示例：自定义元类"><a href="#应用示例：自定义元类" class="headerlink" title="应用示例：自定义元类"></a>应用示例：自定义元类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Creating class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        dct[<span class="hljs-string">&#x27;added_attribute&#x27;</span>] = <span class="hljs-string">&#x27;This is an added attribute&#x27;</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().__new__(cls, name, bases, dct)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">cls, name, bases, dct</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Initializing class <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br>        <span class="hljs-built_in">super</span>().__init__(name, bases, dct)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>(metaclass=MyMeta):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.instance_attribute = <span class="hljs-string">&#x27;Instance attribute&#x27;</span><br><br><span class="hljs-comment"># 实例化 MyClass</span><br>instance = MyClass()<br><span class="hljs-built_in">print</span>(instance.added_attribute)  <span class="hljs-comment"># 输出: This is an added attribute</span><br><span class="hljs-built_in">print</span>(instance.instance_attribute)  <span class="hljs-comment"># 输出: Instance attribute</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在这个示例中： </p>
+<ol>
+<li><strong>MyMeta</strong> ：</li>
+</ol>
+<ul>
+<li>在 <code>__new__</code> 方法中，我们添加了一个 <code>added_attribute</code> 属性到类中。 </li>
+<li>在 <code>__init__</code> 方法中，我们初始化类。</li>
+</ul>
+<ol start="2">
+<li><strong>MyClass</strong> ：</li>
+</ol>
+<ul>
+<li><code>MyClass</code> 使用 <code>MyMeta</code> 作为它的元类，因此在创建 <code>MyClass</code> 时会调用 <code>MyMeta</code> 的 <code>__new__</code> 和 <code>__init__</code> 方法。</li>
+</ul>
+<ol start="3">
+<li><strong>MyClass</strong> ：</li>
+</ol>
+<ul>
+<li>创建 <code>MyClass</code> 的实例 <code>instance</code>，该实例具有 <code>added_attribute</code>（由元类添加）和 <code>instance_attribute</code>（由实例初始化）。</li>
+</ul>
+<h3 id="实战应用：单例模式"><a href="#实战应用：单例模式" class="headerlink" title="实战应用：单例模式"></a>实战应用：单例模式</h3><p>单例模式是一种设计模式，确保一个类只有一个实例。我们可以使用元类来实现单例模式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SingletonMeta</span>(<span class="hljs-title class_ inherited__">type</span>):<br>    _instances = &#123;&#125;<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">cls, *args, **kwargs</span>):<br>        <span class="hljs-keyword">if</span> cls <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> cls._instances:<br>            cls._instances[cls] = <span class="hljs-built_in">super</span>().__call__(*args, **kwargs)<br>        <span class="hljs-keyword">return</span> cls._instances[cls]<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">SingletonClass</span>(metaclass=SingletonMeta):<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># 测试单例模式</span><br>instance1 = SingletonClass()<br>instance2 = SingletonClass()<br><br><span class="hljs-built_in">print</span>(instance1 <span class="hljs-keyword">is</span> instance2)  <span class="hljs-comment"># 输出: True</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在这个示例中： </p>
+<ol>
+<li><strong>SingletonMeta</strong> ：</li>
+</ol>
+<ul>
+<li>重写了 <code>__call__</code> 方法，确保每次实例化类时，返回的都是同一个实例。</li>
+</ul>
+<ol start="2">
+<li><strong>SingletonClass</strong> ：</li>
+</ol>
+<ul>
+<li><code>SingletonClass</code> 使用 <code>SingletonMeta</code> 作为元类，因此在实例化时会调用 <code>SingletonMeta</code> 的 <code>__call__</code> 方法。</li>
+</ul>
+<ol start="3">
+<li><strong>测试单例模式</strong> ：</li>
+</ol>
+<ul>
+<li>创建两个 <code>SingletonClass</code> 的实例 <code>instance1</code> 和 <code>instance2</code>，它们实际上是同一个实例。</li>
+</ul>
+<p>希望这个详细的解释能帮助你更好地理解和应用自定义元类。如果你有更多问题或需要进一步的示例，请告诉我！🦌</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/python/" class="print-no-link">#python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>python类</div>
+      <div>https://www.doit.cloudns.be/2024/06/28/类/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Wangdada</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/06/28/test/" title="test">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">test</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
